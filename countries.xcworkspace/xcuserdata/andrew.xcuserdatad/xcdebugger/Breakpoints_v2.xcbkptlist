@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "countries/CountriesViewController.m"
-            timestampString = "482940279.199051"
+            timestampString = "482945168.327719"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
             landmarkName = "-tapFavorite:"
             landmarkType = "5">
          </BreakpointContent>

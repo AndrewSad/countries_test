@@ -191,7 +191,9 @@
         cell.showCities = !cell.showCities;
         showCities = cell.showCities;
         self.selectedCountry = self.countries[indexPath.row][@"Cities"];
-        [tableView reloadData];
+        NSRange range = NSMakeRange(0, tableView.numberOfSections);
+        NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
+        [tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationFade];
     }else {
         [[NSUserDefaults standardUserDefaults] setObject: [self.selectedCountry[indexPath.row] dictionaryByReplacingNullsWithBlanks] forKey: [CommonHelper udefSelectedCity]];
         [[NSUserDefaults standardUserDefaults] setObject: [self.selectedCountry arrayByReplacingNullsWithBlanks] forKey: [CommonHelper udefSelectedCountry]];
