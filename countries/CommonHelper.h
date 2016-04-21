@@ -12,5 +12,6 @@
 @interface CommonHelper : NSObject
 
 + (NSString *)udefSelectedCity;
++ (NSString *)udefSelectedCountry;
 
 @end

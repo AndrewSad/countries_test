@@ -12,6 +12,7 @@
 #import "NetworkManager.h"
 #import "ImageManager.h"
 #import "NSDictionary+NullReplacement.h"
+#import "NSArray+NullReplacement.h"
 #import "CountryCell.h"
 #import "CountriesData.h"
 
@@ -43,6 +44,10 @@
         [self.loadingCountries stopAnimating];
         self.loadingCountriesLabel.hidden = YES;
         loaded = YES;
+        if ([[NSUserDefaults standardUserDefaults] objectForKey: [CommonHelper udefSelectedCountry]] != nil) {
+            showCities = YES;
+            self.selectedCountry = [[NSUserDefaults standardUserDefaults] objectForKey: [CommonHelper udefSelectedCountry]];
+        }
         [self.CountriesCitiesTable reloadData];
     } else {
         loaded = NO;
@@ -50,6 +55,10 @@
         self.loadingCountriesLabel.text = [StringHelper strLoadingCountries];
         self.loadingCountriesLabel.hidden = NO;
         self.CountriesCitiesTable.hidden = YES;
+        if ([[NSUserDefaults standardUserDefaults] objectForKey: [CommonHelper udefSelectedCountry]] != nil) {
+            showCities = YES;
+            self.selectedCountry = [[NSUserDefaults standardUserDefaults] objectForKey: [CommonHelper udefSelectedCountry]];
+        }
         [NetworkManager getCountries: ^(id result) {
             NSError *error = nil;
             NSDictionary *response = [NSJSONSerialization JSONObjectWithData : result
@@ -185,6 +194,7 @@
         [tableView reloadData];
     }else {
         [[NSUserDefaults standardUserDefaults] setObject: [self.selectedCountry[indexPath.row] dictionaryByReplacingNullsWithBlanks] forKey: [CommonHelper udefSelectedCity]];
+        [[NSUserDefaults standardUserDefaults] setObject: [self.selectedCountry arrayByReplacingNullsWithBlanks] forKey: [CommonHelper udefSelectedCountry]];
         [tableView reloadSections: [NSIndexSet indexSetWithIndex: 1] withRowAnimation: UITableViewRowAnimationNone];
     }
 }
